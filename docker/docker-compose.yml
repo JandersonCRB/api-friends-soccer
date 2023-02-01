@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  fs-postgres:
+    container_name: fs-postgres
+    image: postgres:15.1
+    shm_size: 1gb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: api_friends_soccer_development
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - friends-soccer
+
+  fs-redis:
+    container_name: fs-redis
+    image: redis:7.0.6
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - cache:/data
+    networks:
+      - friends-soccer
+
+  server:
+    depends_on:
+      - fs-postgres
+      - fs-redis
+    container_name: fs-server
+    ports:
+      - '3000:3000'
+    environment:
+      - REDIS_URL=redis://fs-redis:6379/0
+      - DB_HOST=fs-postgres
+    build:
+      context: ../
+      dockerfile: /docker/Dockerfile
+    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    volumes:
+      - ../:/myapp
+    networks:
+      friends-soccer:
+
+networks:
+  friends-soccer:
+    driver: bridge
+
+
+volumes:
+  postgres:
+  cache:
+    driver: local
