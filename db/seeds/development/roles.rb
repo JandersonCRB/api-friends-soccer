@@ -3,7 +3,7 @@
 p "Seeding roles"
 
 roles_data = [
-  { name: "Admin", code: "ADMIN", description: "Aplication Admin" },
+  { name: "Admin", code: "ADMIN", description: "Application Admin" },
   { name: "User", code: "USER", description: "User" }
 ]
 
