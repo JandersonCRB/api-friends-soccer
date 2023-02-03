@@ -23,7 +23,7 @@ describe Users::Create, type: :service do
       end.not_to raise_error
     end
 
-    it 'should create user' do
+    it 'should championships user' do
       expect do
         described_class.call(decoded_token, params)
       end.to change(User, :count).by(1)

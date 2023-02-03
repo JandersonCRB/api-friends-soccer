@@ -13,16 +13,16 @@ module Auth
       )
     end
 
-    def user_roles
-      @decoded_token[:roles]
+    def user_privileges
+      @decoded_token[:privileges]
     end
 
     def admin?
-      user_roles.include?("ADMIN")
+      user_privileges.include?("ADMIN")
     end
 
     def has_privilege?(privilege)
-      user_roles.include?(privilege)
+      user_privileges.include?(privilege)
     end
   end
 end

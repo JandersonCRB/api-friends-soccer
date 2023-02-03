@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :championship do
-    name { "MyString" }
-    user { nil }
+    name { 'Championship name' }
+    owner_id { 1 }
   end
 end
