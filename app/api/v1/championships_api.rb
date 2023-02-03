@@ -6,12 +6,23 @@ module V1
     namespace :championships do
       desc "Create championship"
       params do
+        use :authorization_token
         requires :name, type: String, desc: "name"
       end
       post do
         user_authenticate!
         championship = Championship::Create.call(decoded_token, params).result
         present championship, with: Entities::Championship
+      end
+
+      desc "List championships"
+      params do
+        use :authorization_token
+      end
+      get do
+        user_authenticate!
+        championships = Championship::List.call(decoded_token, params).result
+        present championships, with: Entities::Championship
       end
     end
   end
