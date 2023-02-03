@@ -10,9 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_06_201857) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_03_032442) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "championships", force: :cascade do |t|
+    t.string "name"
+    t.bigint "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_championships_on_owner_id"
+  end
+
+  create_table "championships_managers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "championship_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["championship_id"], name: "index_championships_managers_on_championship_id"
+    t.index ["user_id"], name: "index_championships_managers_on_user_id"
+  end
 
   create_table "privileges", force: :cascade do |t|
     t.string "name"
@@ -55,4 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_06_201857) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "championships", "users", column: "owner_id"
+  add_foreign_key "championships_managers", "championships"
+  add_foreign_key "championships_managers", "users"
 end
