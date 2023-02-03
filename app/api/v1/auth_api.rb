@@ -11,6 +11,7 @@ module V1
       end
       post do
         login = Auth::Login.call(params).result
+        status 200
         present login, with: Entities::Login
       end
     end
