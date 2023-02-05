@@ -1,0 +1,21 @@
+# config/universal.yml
+
+default:
+  aws:
+    ses_address: <%= ENV["SES_ADDRESS"] || "localhost" %>
+    ses_port: <%= ENV["SES_PORT"] || 4789 %>
+  smtp:
+    username: <%= ENV["SMTP_USERNAME"] %>
+    password: <%= ENV["SMTP_PASSWORD"] %>
+
+test:
+  aws:
+    ses_endpoint: nil
+  smtp:
+    username: none
+    password: none
+
+production:
+  smtp:
+    username: <%= ENV["SMTP_USERNAME"] %>
+    password: <%= ENV["SMTP_PASSWORD"] %>

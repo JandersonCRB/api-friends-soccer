@@ -7,7 +7,7 @@ ruby '3.1.2'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4'
-gem 'rename'
+gem 'mail', '~> 2.8', '>= 2.8.1'
 
 # Grape related gems
 gem 'grape', '~> 1.6', '>= 1.6.2'
@@ -16,6 +16,7 @@ gem 'simple_command', '~> 1.0', '>= 1.0.1'
 gem 'grape-entity', '~> 0.10.2'
 gem 'jwt', '~> 2.5'
 gem 'figaro', '~> 1.2'
+gem 'aws-sdk-ses', '~> 1.49'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'

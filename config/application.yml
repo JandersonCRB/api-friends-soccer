@@ -1,2 +1,11 @@
-development:
-  JWT_SECRET: mylittlesecret
+default:
+  SES_ADDRESS: <%= ENV["SES_ADDRESS"] || "http://localhost:4566" %>
+  SES_PORT: <%= ENV["SES_PORT"] || 4566 %>
+
+  SMTP_USERNAME: <%= ENV["SMTP_USERNAME"] %>
+  SMTP_PASSWORD: <%= ENV["SMTP_PASSWORD"] %>
+
+test:
+  SES_ADDRESS: none
+  SMTP_USERNAME: none
+  SMTP_PASSWORD: none

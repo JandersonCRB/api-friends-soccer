@@ -5,5 +5,6 @@ module Exceptions
     WRONG_CREDENTIALS = "WrongCredentials"
     AUTHORITY_ERROR = "AuthorityError"
     EMAIL_TAKEN = "EmailTaken"
+    NOT_FOUND = "NotFound"
   end
 end

@@ -15,5 +15,16 @@ module V1
         present login, with: Entities::Login
       end
     end
+
+    namespace :forgot_password do
+      desc "Forgot password"
+      params do
+        requires :email, type: String, desc: "email"
+      end
+      post do
+        Auth::ForgotPassword.call(params).result
+        status 200
+      end
+    end
   end
 end

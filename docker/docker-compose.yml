@@ -47,6 +47,23 @@ services:
     networks:
       friends-soccer:
 
+  fs-localstack:
+    image: localstack/localstack:1.3.1
+    container_name: fs-localstack
+    entrypoint: ["/opt/code/localstack/docker-entrypoint-extend.sh"]
+    ports:
+      - "4566:4566"            # LocalStack Gateway
+      - "4510-4559:4510-4559"  # external services port range
+      - "8080:8080"
+    environment:
+      - SERVICES=s3,sqs,lambda,ses
+      - DEBUG=1
+      - DATA_DIR=./data
+      - HOSTNAME=localhost
+    volumes:
+      - ./data:/tmp/localstack/data
+      - ./localstack-config.sh:/opt/code/localstack/docker-entrypoint-extend.sh
+
 networks:
   friends-soccer:
     driver: bridge
