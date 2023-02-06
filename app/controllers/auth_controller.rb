@@ -3,9 +3,7 @@
 class AuthController < ApplicationController
   def login
     user = User.find_by(email: auth_params[:email])
-    if user.nil?
-      render json: { error: "Wrong email or password" }, status: :bad_request
-    elsif user.authenticate(auth_params[:password])
+    if user&.authenticate(auth_params[:password])
       render json: user
     else
       render json: { error: "Wrong email or password" }, status: :bad_request

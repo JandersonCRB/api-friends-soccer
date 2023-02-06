@@ -30,7 +30,7 @@ module Auth
     def create_password_reset(user)
       PasswordReset.where(user: user).destroy_all
       PasswordReset.create!(user: user, token: PasswordReset.generate_unique_token(user.id),
-                           expires_at: Time.now + 1.day)
+                            expires_at: Time.now + 1.day)
     end
 
     def send_email(user, password_reset)

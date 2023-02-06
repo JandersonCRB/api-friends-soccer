@@ -5,6 +5,8 @@ AllCops:
   Exclude:
     - 'bin/**/*'
     - 'spec/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
     - 'Gemfile'
     - 'Gemfile.lock'
 

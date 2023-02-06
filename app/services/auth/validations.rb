@@ -4,7 +4,7 @@ module Auth
   module Validations
     def one_of_privileges!(privileges, skip_admin: true)
       return if skip_admin && admin?
-      return if privileges.any? { |privilege| has_privilege?(privilege) }
+      return if privileges.any? { |privilege| privilege?(privilege) }
 
       raise Exceptions::CustomError.new(
         Exceptions::ErrorMessages::AUTHORITY_ERROR,
@@ -21,7 +21,7 @@ module Auth
       user_privileges.include?("ADMIN")
     end
 
-    def has_privilege?(privilege)
+    def privilege?(privilege)
       user_privileges.include?(privilege)
     end
   end
