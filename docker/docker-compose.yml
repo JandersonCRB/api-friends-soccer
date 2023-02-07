@@ -59,6 +59,7 @@ services:
       - HOSTNAME=localhost
     volumes:
       - ./data:/tmp/localstack/data
+      - ./localstack-data:/var/lib/localstack
       - ./init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh
 
 networks:

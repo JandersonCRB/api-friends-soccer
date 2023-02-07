@@ -3,13 +3,15 @@
 require "aws-sdk-ses"
 
 class UserMailer < ApplicationMailer
-  def forgot_password(user, _password_reset)
+  def forgot_password(user, password_reset)
     ses = Aws::SES::Client.new(
       region: "us-west-2",
-      credentials: Aws::Credentials.new("w/e", "w/e"),
+      credentials: Aws::Credentials.new(ENV.fetch("AWS_ACCESS_KEY", "w/e"), ENV.fetch("AWS_SECRET_KEY", "w/e")),
       endpoint: "http://localhost:4566"
     )
 
+    @reset_url = ENV.fetch("RESET_PASSWORD_URL", "http://localhost:3000/reset_password") +
+      "?token=#{password_reset.token}"
     @user = user
     ses.send_email({
                      destination: {
@@ -27,7 +29,7 @@ class UserMailer < ApplicationMailer
                          }
                        }
                      },
-                     source: "no-reply@golsfamilia.com"
+                     source: "no-reply@familiaemcampo.com"
                    })
   end
 end

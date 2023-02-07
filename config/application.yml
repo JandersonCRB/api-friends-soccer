@@ -5,6 +5,9 @@ default:
   SMTP_USERNAME: <%= ENV["SMTP_USERNAME"] %>
   SMTP_PASSWORD: <%= ENV["SMTP_PASSWORD"] %>
 
+  AWS_ACCESS_KEY: <%= ENV["AWS_ACCESS_KEY"] || "w/e"%>
+  AWS_SECRET_KEY: <% ENV["AWS_SECRET_KEY"] || "w/e" %>
+
 test:
   SES_ADDRESS: none
   SMTP_USERNAME: none
