@@ -17,6 +17,7 @@ gem 'grape-entity', '~> 0.10.2'
 gem 'jwt', '~> 2.5'
 gem 'figaro', '~> 1.2'
 gem 'aws-sdk-ses', '~> 1.49'
+gem 'tilt', '~> 2.0', '>= 2.0.11'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'

@@ -253,6 +253,7 @@ GEM
     ruby2_keywords (0.0.5)
     simple_command (1.0.1)
     thor (1.2.1)
+    tilt (2.0.11)
     timeout (0.3.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
@@ -289,6 +290,7 @@ DEPENDENCIES
   rubocop-rails (~> 2.17, >= 2.17.2)
   rubocop-rspec (~> 2.15)
   simple_command (~> 1.0, >= 1.0.1)
+  tilt (~> 2.0, >= 2.0.11)
   tzinfo-data
 
 RUBY VERSION

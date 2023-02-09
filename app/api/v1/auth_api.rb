@@ -26,5 +26,22 @@ module V1
         status 200
       end
     end
+
+    content_type :html, "text/html"
+
+    get :reset_password do
+      content_type "text/html"
+      format "html"
+      template = Tilt.new("app/views/reset_password.html.erb")
+      template.render(self, token: params[:token])
+    end
+
+    params do
+      requires :token, type: String, desc: "token"
+    end
+    post :reset_password do
+      Auth::ResetPassword.call(params).result
+      status 200
+    end
   end
 end
