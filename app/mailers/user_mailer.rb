@@ -10,7 +10,7 @@ class UserMailer < ApplicationMailer
       endpoint: "http://localhost:4566"
     )
 
-    @reset_url = ENV.fetch("RESET_PASSWORD_URL", "http://localhost:3000/reset_password") +
+    @reset_url = ENV.fetch("RESET_PASSWORD_URL", "http://localhost:3000/api/v1/reset_password") +
                  "?token=#{password_reset.token}"
     @user = user
     ses.send_email({
