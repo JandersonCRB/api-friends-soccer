@@ -7,7 +7,8 @@ module Entities
     end
 
     expose :id, documentation: { type: "String", desc: "User Id" }
-    expose :name, documentation: { type: "String", desc: "User name" }
+    expose :first_name, documentation: { type: "String", desc: "User's first name" }
+    expose :last_name, documentation: { type: "String", desc: "User's last name" }
     expose :email, documentation: { type: "String", desc: "User email" }
     expose :roles, documentation: { type: "String", desc: "User roles" }
     expose :privileges, documentation: { type: Array, desc: "User privileges" }

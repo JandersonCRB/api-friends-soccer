@@ -6,7 +6,7 @@ RSpec.describe Championships::Create, type: :services do
   let(:decoded_token) {
     {
       user_id: user.id,
-      roles: ['ADMIN'],
+      roles: [],
       privileges: ['CREATE_CHAMPIONSHIP'],
     }
   }

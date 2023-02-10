@@ -30,7 +30,8 @@ module V1
         requires :email, type: String, desc: "Email of the user"
         requires :password, type: String, desc: "Password of the user"
       end
-      post do
+      post "/sign_up" do
+        use :authorization_token
         user = Users::Create.call(decoded_token, params).result
         present user, with: Entities::User
       end

@@ -4,7 +4,8 @@ describe Users::Create, type: :service do
   let(:decoded_token) {
     {
       user_id: 1,
-      roles: ['ADMIN']
+      roles: ['ADMIN'],
+      privileges: []
     }
   }
 
@@ -12,7 +13,8 @@ describe Users::Create, type: :service do
     {
       email: 'user@fs.com',
       password: 'password',
-      name: 'user',
+      first_name: 'user',
+      last_name: 'fs'
     }
   }
 
