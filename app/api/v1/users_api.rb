@@ -22,6 +22,18 @@ module V1
         requires :email, type: String, desc: "Email of the user"
         optional :password, type: String, desc: "Password of the user"
       end
+
+      desc "Sign up"
+      params do
+        requires :first_name, type: String, desc: "First Name of the user"
+        requires :last_name, type: String, desc: "Last Name of the user"
+        requires :email, type: String, desc: "Email of the user"
+        requires :password, type: String, desc: "Password of the user"
+      end
+      post do
+        user = Users::Create.call(decoded_token, params).result
+        present user, with: Entities::User
+      end
     end
   end
 end
