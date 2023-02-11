@@ -15,14 +15,6 @@ module V1
         present users, with: Entities::User
       end
 
-      desc "Create a new user"
-      params do
-        use :authorization_token
-        requires :name, type: String, desc: "Name of the user"
-        requires :email, type: String, desc: "Email of the user"
-        optional :password, type: String, desc: "Password of the user"
-      end
-
       desc "Sign up"
       params do
         requires :first_name, type: String, desc: "First Name of the user"
@@ -31,9 +23,8 @@ module V1
         requires :password, type: String, desc: "Password of the user"
       end
       post "/sign_up" do
-        use :authorization_token
-        user = Users::Create.call(decoded_token, params).result
-        present user, with: Entities::User
+        user = Users::SignUp.call(params).result
+        present user, with: Entities::SignUp
       end
     end
   end
