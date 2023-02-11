@@ -10,10 +10,13 @@ module Users
 
     def call
       Rails.logger.info("Sign up with params=#{@params}")
-      create_user
+      user = create_user
 
+      token = Auth::Helpers.generate_token(user)
       # TODO: SEND EMAIL\
       # send_email(user)
+
+      { token: token, user: user }
     end
 
     private
