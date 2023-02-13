@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_13_040135) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_13_041326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,6 +37,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_040135) do
     t.datetime "updated_at", null: false
     t.index ["championship_id"], name: "index_championships_managers_on_championship_id"
     t.index ["user_id"], name: "index_championships_managers_on_user_id"
+  end
+
+  create_table "match_goals", force: :cascade do |t|
+    t.bigint "match_team_id", null: false
+    t.bigint "goaler_match_team_player_id_id", null: false
+    t.bigint "assister_match_team_player_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assister_match_team_player_id_id"], name: "index_match_goals_on_assister_match_team_player_id_id"
+    t.index ["goaler_match_team_player_id_id"], name: "index_match_goals_on_goaler_match_team_player_id_id"
+    t.index ["match_team_id"], name: "index_match_goals_on_match_team_id"
   end
 
   create_table "match_team_players", force: :cascade do |t|
@@ -130,6 +141,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_040135) do
   add_foreign_key "championships", "users", column: "owner_id"
   add_foreign_key "championships_managers", "championships"
   add_foreign_key "championships_managers", "users"
+  add_foreign_key "match_goals", "match_team_players", column: "assister_match_team_player_id_id"
+  add_foreign_key "match_goals", "match_team_players", column: "goaler_match_team_player_id_id"
+  add_foreign_key "match_goals", "match_teams"
   add_foreign_key "match_team_players", "match_teams"
   add_foreign_key "match_team_players", "players"
   add_foreign_key "match_teams", "matches"
