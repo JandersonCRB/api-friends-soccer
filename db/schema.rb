@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_13_032940) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_13_040135) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,6 +37,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_032940) do
     t.datetime "updated_at", null: false
     t.index ["championship_id"], name: "index_championships_managers_on_championship_id"
     t.index ["user_id"], name: "index_championships_managers_on_user_id"
+  end
+
+  create_table "match_team_players", force: :cascade do |t|
+    t.bigint "match_team_id", null: false
+    t.bigint "player_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_team_id"], name: "index_match_team_players_on_match_team_id"
+    t.index ["player_id"], name: "index_match_team_players_on_player_id"
+  end
+
+  create_table "match_teams", force: :cascade do |t|
+    t.bigint "match_id", null: false
+    t.string "team_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_match_teams_on_match_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.bigint "championship_edition_id", null: false
+    t.datetime "match_datetime"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["championship_edition_id"], name: "index_matches_on_championship_edition_id"
   end
 
   create_table "password_resets", force: :cascade do |t|
@@ -105,6 +130,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_032940) do
   add_foreign_key "championships", "users", column: "owner_id"
   add_foreign_key "championships_managers", "championships"
   add_foreign_key "championships_managers", "users"
+  add_foreign_key "match_team_players", "match_teams"
+  add_foreign_key "match_team_players", "players"
+  add_foreign_key "match_teams", "matches"
+  add_foreign_key "matches", "championship_editions"
   add_foreign_key "password_resets", "users"
   add_foreign_key "players", "championships"
   add_foreign_key "players", "users"
