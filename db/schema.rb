@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_05_191339) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_13_032940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "championship_editions", force: :cascade do |t|
+    t.bigint "championship_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["championship_id"], name: "index_championship_editions_on_championship_id"
+  end
 
   create_table "championships", force: :cascade do |t|
     t.string "name"
@@ -38,6 +46,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_191339) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_password_resets_on_user_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "user_id", null: false
+    t.bigint "championship_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["championship_id"], name: "index_players_on_championship_id"
+    t.index ["user_id"], name: "index_players_on_user_id"
   end
 
   create_table "privileges", force: :cascade do |t|
@@ -82,8 +101,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_191339) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "championship_editions", "championships"
   add_foreign_key "championships", "users", column: "owner_id"
   add_foreign_key "championships_managers", "championships"
   add_foreign_key "championships_managers", "users"
   add_foreign_key "password_resets", "users"
+  add_foreign_key "players", "championships"
+  add_foreign_key "players", "users"
 end
