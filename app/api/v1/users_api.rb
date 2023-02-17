@@ -26,6 +26,16 @@ module V1
         user = Users::SignUp.call(params).result
         present user, with: Entities::SignUp
       end
+
+      desc "List self participating championships"
+      params do
+        use :authorization_token
+      end
+      get "/participating_championships" do
+        user_authenticate!
+        championships = Championships::ListParticipating.call(decoded_token, params).result
+        present championships, with: Entities::Championship
+      end
     end
   end
 end

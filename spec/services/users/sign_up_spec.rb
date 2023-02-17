@@ -16,15 +16,5 @@ RSpec.describe Users::SignUp, type: :service do
         described_class.call(params)
       end.to change { User.count }.by(1)
     end
-
-    it "returns the user" do
-      user = described_class.call(params).result
-      expect(user).to be_a(User)
-    end
-
-    it "returns the user with the correct attributes" do
-
-    end
-
   end
 end

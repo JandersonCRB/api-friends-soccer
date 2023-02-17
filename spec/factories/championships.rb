@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :championship do
-    name { 'Championship name' }
-    owner_id { 1 }
+    name { "Primeira divisão de #{Faker::Nation.capital_city}"  }
+    owner_id { create(:user).id }
   end
 end
