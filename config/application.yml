@@ -8,7 +8,11 @@ default:
   AWS_ACCESS_KEY: <%= ENV["AWS_ACCESS_KEY"] || "w/e"%>
   AWS_SECRET_KEY: <% ENV["AWS_SECRET_KEY"] || "w/e" %>
 
+development:
+  JWT_SECRET: 'iusg09whg0hwhr8g435kl43n5lk34h5iln0wrhg93rwhg'
+
 test:
+  JWT_SECRET: 'e45io43634oi5j34po56j34op'
   SES_ADDRESS: none
   SMTP_USERNAME: none
   SMTP_PASSWORD: none

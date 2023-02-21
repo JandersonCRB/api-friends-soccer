@@ -28,6 +28,7 @@ class API < Grape::API
 
   namespace :v1 do
     mount V1::AuthAPI
+    mount V1::ChampionshipsAPI
     mount V1::PersonalTrainersAPI
     mount V1::StudentsAPI
     mount V1::UsersAPI
